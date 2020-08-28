@@ -1,44 +1,32 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Exercise Share App Lite
 
-## Available Scripts
+その日にした運動を報告し合うグループ LINE に所属しているのだが,そのようなことが活発に行われるアプリを作ってみた,
+機能重視で最低限のスタイリングで作ったので,Lite
 
-In the project directory, you can run:
+アプリ Pre
 
-### `yarn start`
+[https://nbr41to.github.io/exercise_app_lite/](https://nbr41to.github.io/exercise_app_lite/)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+アプリ Src
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+[https://github.com/nbr41to/exercise_app_lite](https://github.com/nbr41to/exercise_app_lite)
 
-### `yarn test`
+## 機能一覧
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- エクササイズの投稿一覧
+- 新規エクササイズ投稿ページ
+  （マイエクササイズから追加可能）
+- マイエクササイズの追加と削除
+- マイプロフィールの名前を変更
+- （プロフィール写真の変更は本番と書くコードが違うので,未実装）
+- ログアウト
 
-### `yarn build`
+## 技術一覧
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ReactHook の練習
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- useState
+- useEffect（あんま使わなかった...）
+- useContext
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+時間があれば,Firebase で正式版をリリースしたい
