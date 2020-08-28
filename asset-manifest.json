@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.js": "/react-pages/static/js/main.944cb02b.chunk.js",
-    "main.js.map": "/react-pages/static/js/main.944cb02b.chunk.js.map",
-    "runtime-main.js": "/react-pages/static/js/runtime-main.bc0f9344.js",
-    "runtime-main.js.map": "/react-pages/static/js/runtime-main.bc0f9344.js.map",
-    "static/js/2.058fee59.chunk.js": "/react-pages/static/js/2.058fee59.chunk.js",
-    "static/js/2.058fee59.chunk.js.map": "/react-pages/static/js/2.058fee59.chunk.js.map",
-    "index.html": "/react-pages/index.html",
-    "precache-manifest.6ff2d2f810af32a0a689015f60a907a0.js": "/react-pages/precache-manifest.6ff2d2f810af32a0a689015f60a907a0.js",
-    "service-worker.js": "/react-pages/service-worker.js",
-    "static/js/2.058fee59.chunk.js.LICENSE.txt": "/react-pages/static/js/2.058fee59.chunk.js.LICENSE.txt",
-    "static/media/user1.jpg": "/react-pages/static/media/user1.400032f4.jpg",
-    "static/media/user2.jpg": "/react-pages/static/media/user2.29272833.jpg",
-    "static/media/user3.jpg": "/react-pages/static/media/user3.1d1b6a8c.jpg",
-    "static/media/user4.jpg": "/react-pages/static/media/user4.b8b67c77.jpg"
+    "main.js": "/exercise_app_lite/static/js/main.944cb02b.chunk.js",
+    "main.js.map": "/exercise_app_lite/static/js/main.944cb02b.chunk.js.map",
+    "runtime-main.js": "/exercise_app_lite/static/js/runtime-main.a47680b2.js",
+    "runtime-main.js.map": "/exercise_app_lite/static/js/runtime-main.a47680b2.js.map",
+    "static/js/2.058fee59.chunk.js": "/exercise_app_lite/static/js/2.058fee59.chunk.js",
+    "static/js/2.058fee59.chunk.js.map": "/exercise_app_lite/static/js/2.058fee59.chunk.js.map",
+    "index.html": "/exercise_app_lite/index.html",
+    "precache-manifest.14cad2942f7aebf854af8efb4c4e0fce.js": "/exercise_app_lite/precache-manifest.14cad2942f7aebf854af8efb4c4e0fce.js",
+    "service-worker.js": "/exercise_app_lite/service-worker.js",
+    "static/js/2.058fee59.chunk.js.LICENSE.txt": "/exercise_app_lite/static/js/2.058fee59.chunk.js.LICENSE.txt",
+    "static/media/user1.jpg": "/exercise_app_lite/static/media/user1.400032f4.jpg",
+    "static/media/user2.jpg": "/exercise_app_lite/static/media/user2.29272833.jpg",
+    "static/media/user3.jpg": "/exercise_app_lite/static/media/user3.1d1b6a8c.jpg",
+    "static/media/user4.jpg": "/exercise_app_lite/static/media/user4.b8b67c77.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.bc0f9344.js",
+    "static/js/runtime-main.a47680b2.js",
     "static/js/2.058fee59.chunk.js",
     "static/js/main.944cb02b.chunk.js"
   ]
