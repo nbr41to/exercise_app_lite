@@ -1,17 +1,4 @@
-# デプロイしたいディレクトリの設定
 [build]
-  publish = "/dist"
-
-# 本番環境のビルドコマンド
-[context.production]
-  command = "yarn && yarn prod"
-
-# ステージング環境のビルドコマンド
-[context.staging]
-  command = "yarn && yarn stg"
-
-# SPA用の設定
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  command = "npm run build"
+  publish="path-to-react-app/build"
+  base = "path-to-react-app"
