@@ -1,9 +1,21 @@
 import React, { useContext, useEffect } from 'react';
 import { Context } from "./Context"
+import firebase from "./firebase"
+
 
 function Post() {
     const { users, posts, setPosts } = useContext(Context)
     console.log(posts)
+    useEffect(() => {
+        firebase.firestore().collection("posts").get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                const data = doc.data()
+                console.log(`${doc.id} => ${doc.data()}`);
+                console.log(data.comment);
+            });
+        });
+
+    })
     return (
         <div>
             {posts.sort((a, b) => {
