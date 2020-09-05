@@ -34,6 +34,7 @@ const Layout = ({ children }) => {
       displayName: "testman",
       email: "testman@test.com",
       uid: "testestest",
+      photoURL: null,
     })
   }
 

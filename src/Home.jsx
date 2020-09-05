@@ -3,7 +3,7 @@ import EditExercise from "./Modal/EditExercise"
 import NewPost from "./Modal/NewPost"
 import EditProfile from "./Modal/EditProfile"
 import Post from "./Post"
-import Layout, { AuthContext } from "./components/Layout"
+import { AuthContext } from "./components/Layout"
 import { ContextProvider } from "./Context"
 
 

@@ -1,48 +1,33 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Context } from "../Context"
+import firebase from "../firebase"
+import { AuthContext } from "../components/Layout"
 
-function EditProfile(props) {
-  const { currentUser, users, setUsers } = useContext(Context);
-  const changed_users = { ...users }
-  const photoChange = (e) => {
-    changed_users[currentUser].photo_url = e.target.files[0]
-    console.log(e.target.files[0])
-    console.log(changed_users[currentUser].photo_url)
+const EditProfile = (props) => {
+  const [user, setUser] = useContext(AuthContext);
+  const [name, setName] = useState()
+  const [photo, setPhoto] = useState()
 
-  }
-  const nameChange = (e) => {
-    changed_users[currentUser].name = e.target.value
-    console.log(users[currentUser].name)
-  }
-
-  console.log(users[currentUser].name)
-  const done = () => {
-    // console.log(users[currentUser].name)
-    // console.log(changed_users[currentUser].name)
-    // if (!changed_users[currentUser].name === users[currentUser].name) {
-    setUsers(changed_users)
+  const onSubmit = () => {
+    firebase.auth().currentUser.updateProfile({
+      displayName: name,
+      // photoURL: photo,
+    })
     props.closed(false)
-    // } else {
-    //   alert("変更する名前を入力してください！")
-    // }
-    /**
-     * バリデーションをしたいけど,usersがonChangeですでに書き換わっている謎の問題発生
-     */
   }
-
+  console.log(user)
   return (
     <div style={{ width: '100%', height: '100vh', backgroundColor: "#eee", position: "fixed", zIndex: 10 }}>
       <button onClick={() => { props.closed(false) }}>×</button>
       <h1>my profile</h1>
       <p>your photo</p>
       <p>※画像は現在変更できません！</p>
-      <img src={users[currentUser].photo_url} style={{ width: '200px', height: '200px', borderRadius: '100%' }} />
-      <input type="file" accept="image/*" onChange={photoChange} />
+      {user.photoURL !== null && <img src={user.photoURL} style={{ width: '200px', height: '200px', borderRadius: '100%' }} />}
+      <input type="file" accept="image/*" onChange={(e) => setPhoto(e.target.files[0])} />
       <br />
-      <p>your name: {users[currentUser].name}</p>
-      <input type="text" placeholder={users[currentUser].name} onChange={nameChange} />
+      <p>your name: {user.displayName}</p>
+      <input type="text" placeholder={user.displayName} onChange={(e) => setName(e.target.value)} />
       <hr />
-      <button onClick={done}>変更を適応する</button>
+      <button onClick={onSubmit}>変更を適応する</button>
     </div >
   );
 }
