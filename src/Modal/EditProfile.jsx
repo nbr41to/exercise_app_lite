@@ -13,6 +13,12 @@ const EditProfile = (props) => {
       // photoURL: photo,
     })
     props.closed(false)
+    setUser(
+      {
+        ...user,
+        displayName: name,
+      }
+    )
   }
   console.log(user)
   return (

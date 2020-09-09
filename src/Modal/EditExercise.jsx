@@ -9,19 +9,31 @@ function EditExercise(props) {
   const [newMenu, setNewMenu] = useState("")
 
   useEffect(() => {
-    firebase.firestore().collection("user")
-      .onSnapshot((snapshot) => {
-        let getUser = snapshot.docs.map((doc) => {
-          console.log(doc.id)
-          if (doc.id === user.uid) {
-            return doc.data();
-          }
-        });
-        console.log(getUser)
-        console.log(getUser[0].exercise)
-        setMyExercise(getUser[0].exercise)
-      });
-
+    let getExercises = []
+    // ユーザのエクササイズを取得
+    const docRef = firebase.firestore().collection("user").doc(user.uid)
+    docRef.get().then(doc => {
+      if (doc.exists) {
+        const data = doc.data()
+        console.log("Document data:", data.exercises);
+        getExercises = data.exercises
+      } else {
+        console.log("No such document!");
+        // ユーザのDocがなかった場合新規作成する
+        firebase.firestore().collection("user").doc(user.uid).set({
+          exercises: [],
+        })
+          .then(() => {
+            console.log("create new doc");
+          })
+          .catch((error) => {
+            console.error("Error: ", error);
+          });
+      }
+      setMyExercise(getExercises)
+    }).catch(function (error) {
+      console.log("Error getting document:", error);
+    })
   }, [])
 
 
@@ -32,10 +44,10 @@ function EditExercise(props) {
         newMenu
       ],
     })
-      .then(function (docRef) {
-        console.log("Document written with ID: ", docRef.id);
+      .then(() => {
+        console.log("Document written success");
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.error("Error adding document: ", error);
       });
     setMyExercise([
@@ -46,17 +58,18 @@ function EditExercise(props) {
   }
 
   const exerciseDelete = (index) => {
-    setMyExercise(myExercise.slice(0, index))
-    firebase.firestore.collection("user").add({
-      exercises: [
-        ...myExercise
-      ],
+    const key = index
+    const newExercise = myExercise.filter((_, index) => index !== key)
+    console.log(newExercise)
+    firebase.firestore().collection("user").doc(user.uid).set({
+      exercises: newExercise,
     })
-      .then(function (docRef) {
-        console.log("Document written with ID: ", docRef.id);
+      .then(() => {
+        console.log("Document deleted success");
+        setMyExercise(newExercise)
       })
-      .catch(function (error) {
-        console.error("Error adding document: ", error);
+      .catch((error) => {
+        console.error("Error dalete document: ", error);
       });
   }
 

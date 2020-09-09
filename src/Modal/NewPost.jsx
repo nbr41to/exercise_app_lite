@@ -1,78 +1,97 @@
-import React, { useState, useContext } from 'react';
-import { Context } from "../Context"
+import React, { useState, useContext, useEffect } from 'react';
+import { AuthContext } from "../components/Layout"
+import firebase from "../firebase"
 
 function NewPost(props) {
-  const { currentUser, users, posts, setPosts } = useContext(Context);
-  const [newpost, setNewpost] = useState({
-    user: currentUser,
-    time: "",
-    exercise: [],
-    comment: "",
-  })
+  const [user, setUser] = useContext(AuthContext);
+  const [myExercise, setMyExercise] = useState([])
+  const [comment, setComment] = useState("")
+  const [postExercises, setPostExercises] = useState([])
 
-
-  // 2桁にするやつ[未使用] NUM...出力する数字 LEN...桁数
-  function zeroPadding(NUM, LEN) {
-    return (Array(LEN).join('0') + NUM).slice(-LEN);
-  }
+  useEffect(() => {
+    let getExercises = []
+    // ユーザのエクササイズを取得
+    const docRef = firebase.firestore().collection("user").doc(user.uid)
+    docRef.get().then(doc => {
+      if (doc.exists) {
+        const data = doc.data()
+        console.log("Document data:", data.exercises);
+        getExercises = data.exercises
+      } else {
+        console.log("No such document!");
+        // ユーザのDocがなかった場合新規作成する
+        firebase.firestore().collection("user").doc(user.uid).set({
+          exercises: [],
+        })
+          .then(() => {
+            console.log("create new doc");
+          })
+          .catch((error) => {
+            console.error("Error: ", error);
+          });
+      }
+      setMyExercise(getExercises)
+    }).catch(function (error) {
+      console.log("Error getting document:", error);
+    })
+  }, [])
 
   const exerciseSelect = (index) => {
     // const key = index
-    setNewpost(
-      {
-        ...newpost,
-        exercise: [
-          ...newpost.exercise,
-          users[currentUser].exercise[index]
-        ]
-      }
+    setPostExercises([
+      ...postExercises,
+      myExercise[index]
+    ]
     )
   }
 
-  const commentChange = (e) => {
-    setNewpost(
-      {
-        ...newpost,
-        comment: e.target.value,
-      }
-    )
-  }
 
   const onSubmit = () => {
-    const date = new Date()
-    const nowTime = date.getFullYear() + "/" +
-      (date.getMonth() + 1) + "/" +
-      date.getDate() + "," +
-      date.getHours() + ":" +
-      date.getMinutes() + ":" +
-      date.getSeconds()
-    setPosts(
-      [...posts,
+    const d = new Date(); // Today
+    const DateTimeFormat = 'YYYY/MM/DD hh:mi:ss'; // "2019/10/04 12:34:56" 
+    let nowTime = DateTimeFormat
+      .replace(/YYYY/g, String(d.getFullYear()))
+      .replace(/MM/g, ('0' + (d.getMonth() + 1)).slice(-2))
+      .replace(/DD/g, ('0' + d.getDate()).slice(-2))
+      .replace(/hh/g, ('0' + d.getHours()).slice(-2))
+      .replace(/mi/g, ('0' + d.getMinutes()).slice(-2))
+      .replace(/ss/g, ('0' + d.getSeconds()).slice(-2));
+    firebase.firestore().collection("posts").add(
       {
-        user: currentUser,
+        user_name: user.displayName,
+        user_id: user.uid,
         time: nowTime,
-        exercise: newpost.exercise,
-        comment: newpost.comment,
+        exercises: postExercises,
+        comment: comment,
+        nice: [],
       }
-      ]
     )
-    props.closed(false)
+      .then(function (docRef) {
+        console.log("Document written with ID: ", docRef.id);
+        alert("新しい投稿が完了しました！")
+        props.closed(false)
+      })
+      .catch(function (error) {
+        console.error("Error adding document: ", error);
+      });
+
   }
+
   return (
     <div style={{ width: '100%', height: '100vh', backgroundColor: "#eee", position: "fixed", zIndex: 10 }}>
       <button onClick={() => { props.closed(false) }}>×</button>
       <h1>new post</h1>
       <p>下から投稿するエクササイズを追加してください！</p>
       <ul>
-        {newpost.exercise.map((menu, index) => <li key={index}>{menu}</li>)}
+        {postExercises.map((menu, index) => <li key={index}>{menu}</li>)}
       </ul>
       <p>達成感や感想など！</p>
-      <input type="text" placeholder="real ecstacy" onChange={commentChange} />
+      <input type="text" placeholder="real ecstacy" onChange={(e) => setComment(e.target.value)} />
       <button onClick={onSubmit}>投稿</button >
       <hr />
       <h2>my exercise</h2>
       <ul>
-        {users[currentUser].exercise.map((menu, index) =>
+        {myExercise.map((menu, index) =>
           <li key={index}>{menu}<button onClick={() => { exerciseSelect(index) }}>＋</button></li>
         )}
       </ul>
