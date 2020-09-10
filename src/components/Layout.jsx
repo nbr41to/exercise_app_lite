@@ -13,8 +13,7 @@ import firebase from "../firebase";
 export const AuthContext = React.createContext([null, () => { }]);
 
 const Layout = ({ children }) => {
-  const [user, setUser] = useState("a")
-  // const [users, setUsers] = useState(null)
+  const [user, setUser] = useState(null)
   const [openLogin, setOpenLogin] = useState(false)
   const [openSignup, setOpenSignup] = useState(false)
 
