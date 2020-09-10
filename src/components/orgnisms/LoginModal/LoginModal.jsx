@@ -15,11 +15,12 @@ const LoginModal = ({ setOpenLogin }) => {
             .then(() => {
                 firebase.auth().onAuthStateChanged((user) => {
                     if (user) {
-                        setUser(user)
-                        console.log(user)
-                        // navigate("/")
+                        firebase.firestore().collection("user").doc(user.uid).get().then((doc) => {
+                            setUser(doc.data())
+                        })
                     }
                 })
+                console.log(user)
             })
             .catch(error => {
                 alert(error)

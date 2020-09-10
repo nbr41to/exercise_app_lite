@@ -11,7 +11,7 @@ function NewPost(props) {
   useEffect(() => {
     let getExercises = []
     // ユーザのエクササイズを取得
-    const docRef = firebase.firestore().collection("user").doc(user.uid)
+    const docRef = firebase.firestore().collection("user").doc(user.id)
     docRef.get().then(doc => {
       if (doc.exists) {
         const data = doc.data()
@@ -20,7 +20,7 @@ function NewPost(props) {
       } else {
         console.log("No such document!");
         // ユーザのDocがなかった場合新規作成する
-        firebase.firestore().collection("user").doc(user.uid).set({
+        firebase.firestore().collection("user").doc(user.id).set({
           exercises: [],
         })
           .then(() => {
@@ -58,8 +58,7 @@ function NewPost(props) {
       .replace(/ss/g, ('0' + d.getSeconds()).slice(-2));
     firebase.firestore().collection("posts").add(
       {
-        user_name: user.displayName,
-        user_id: user.uid,
+        user_id: user.id,
         time: nowTime,
         exercises: postExercises,
         comment: comment,
@@ -74,7 +73,6 @@ function NewPost(props) {
       .catch(function (error) {
         console.error("Error adding document: ", error);
       });
-
   }
 
   return (

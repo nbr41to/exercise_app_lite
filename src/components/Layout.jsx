@@ -1,47 +1,42 @@
-import React, { useState, useContext, useEffect } from "react"
+import React, { useState } from "react"
 // import { AuthProvider, AuthContext } from "../Auth";
 import LoginModal from "./orgnisms/LoginModal"
 import SignupModal from "./orgnisms/SignupModal"
 import Button from "./atoms/Button"
-// import Image from "./Image"
+import top from "../images/user4.jpg"
 import firebase from "../firebase";
 
 export const AuthContext = React.createContext([null, () => { }]);
 
 const Layout = ({ children }) => {
   const [user, setUser] = useState(null)
+  // const [users, setUsers] = useState(null)
   const [openLogin, setOpenLogin] = useState(false)
   const [openSignup, setOpenSignup] = useState(false)
-  // const user = useContext(AuthContext)
-  // useEffect(() => {
-  //   // firebase.auth().onAuthStateChanged(user => {
-  //   //   setUser(user)
-  //   // })
-  //   // setUser(firebase.auth().currentUser)
-  //   console.log(user)
-  // }, [user])
 
   const signout = () => {
     firebase.auth().signOut().then(() => {
-      // navigate("/")
     }).catch(function (error) {
       alert(error)
     });
   }
 
   const toriaezu = () => {
-    setUser({
-      displayName: "testman",
-      email: "testman@test.com",
-      uid: "testestest",
-      photoURL: null,
+    firebase.firestore().collection("user").doc("testestest").get().then((doc) => {
+      setUser(doc.data())
     })
+    console.log(user)
   }
 
   // console.log(user)
   // console.log(firebase.auth().currentUser)
   return (
-    <AuthContext.Provider value={[user, setUser]}>
+    <AuthContext.Provider
+      value={[user, setUser]}
+    >
+      <header header style={{ color: 'white', backgroundColor: "limegreen" }}>
+        <h1>Exercise Share App</h1>
+      </header>
       {
         user ?
           <>
@@ -50,7 +45,7 @@ const Layout = ({ children }) => {
           </>
           :
           <>
-            <h1>ログインしてください</h1>
+            <img src={top} style={{ height: "220px" }} />
             {openLogin && <LoginModal setOpenLogin={setOpenLogin} />}
             {openSignup && <SignupModal setOpenSignup={setOpenSignup} />}
             <div>
@@ -61,7 +56,8 @@ const Layout = ({ children }) => {
             </div>
           </>
       }
-    </AuthContext.Provider >
+      <footer>© 2020 nobCo.</footer>
+    </AuthContext.Provider>
   )
 }
 
