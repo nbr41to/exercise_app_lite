@@ -49,7 +49,6 @@ const EditProfile = (props) => {
       <button onClick={() => { props.closed(false) }}>×</button>
       <h1>my profile</h1>
       <p>your photo</p>
-      <p>※画像は現在変更できません！</p>
       {photoUrl && <img src={photoUrl} style={{ width: '200px', height: '200px', borderRadius: '100%' }} />}
       <input type="file" accept="image/*" onChange={(e) => handleImage(e)} />
       <br />

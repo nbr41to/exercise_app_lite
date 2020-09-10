@@ -7,7 +7,7 @@ export const StyledComponents = styled.footer`
     padding: 1rem 2rem;
     text-align: center;
 
-    position: absolute;
+    position: relative;
     bottom: 0;
     small {
         font-size:1.4rem;

@@ -5,6 +5,7 @@ import NewPost from "../Modal/NewPost"
 import EditExercise from "../Modal/EditExercise"
 import EditProfile from "../Modal/EditProfile"
 import Post from "../../Post"
+import PostView from "../../orgnisms/PostView"
 import { AuthContext } from "../../Layout"
 
 import CreateIcon from '@material-ui/icons/Create';
@@ -54,7 +55,8 @@ function Home() {
         </button >
       </div>
       <h2>Today's post</h2>
-      <Post />
+      {/* <Post /> */}
+      <PostView />
     </StyledComponent >
   );
 }
