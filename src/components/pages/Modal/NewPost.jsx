@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { AuthContext } from "../components/Layout"
-import firebase from "../firebase"
+import { AuthContext } from "../../Layout"
+import firebase from "../../../firebase"
 
 function NewPost(props) {
   const [user, setUser] = useContext(AuthContext);
