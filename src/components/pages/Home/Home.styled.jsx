@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 
 const StyledComponent = styled.div`
-    h1 {
+    .top-msg {
         font-size:2.0rem;
         font-weight: bold;
         text-align: center;
         padding: 1rem
     }
-    p {
+    .user-info {
         font-size: 1.4rem;
         text-align: right;
         padding: 1rem
@@ -34,8 +34,9 @@ const StyledComponent = styled.div`
             }
         }
     }
-    h2 {
+    .posts-ttl {
         font-size: 1.8rem;
+        font-weight: bold;
         padding: 0 1rem
     }
 `

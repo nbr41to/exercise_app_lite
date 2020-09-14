@@ -2,7 +2,8 @@ import styled from 'styled-components'
 
 const StyledComponent = styled.div`
     display: flex;
-    justify-content: flex-start;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     background-color: lightblue;
     padding: 1rem;
@@ -13,35 +14,33 @@ const StyledComponent = styled.div`
 
     .user-info {
         display: flex;
-        flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
-        padding: 0 1rem;
-        image {
-            width: 8rem;
-            height: 8rem;
+        width: 90%;
+        border-bottom: 1px solid #444;
+        padding-bottom: 1rem;
+        img {
+            width: 5rem;
+            height: 5rem;
             border-radius: 100%;
         }
         p {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-weight: bold;
-        }
-        .delete {
-            background-color: #ccc;
-            padding: 0.5rem;
-            border: 1px solid #444;
-            border-radius: 5px;
-            margin: 1rem;
+            padding: 1rem;
         }
     }
     .post-info {
+        width:90%;
+        padding: 1rem;
         ul {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: flex-start;
             background-color: white;
             box-shadow: 1px 1px 2px 0;
+            padding-bottom: 1rem;
             h2 {
                 width: 100%;
                 font-size: 1.4rem;
@@ -54,7 +53,7 @@ const StyledComponent = styled.div`
             }
             li {
                 font-size: 1.4rem;
-                margin: 0.5rem;
+                margin: 0.5rem 1rem;
                 &:before {
                     content: '＊';
                     margin-right: 5px;
@@ -64,6 +63,7 @@ const StyledComponent = styled.div`
         .comment {
             font-size: 1.6rem;
             text-align: left;
+            padding: 1rem 0;
         }
         .nice-button {
             background-color: white;
@@ -84,6 +84,15 @@ const StyledComponent = styled.div`
             .time {
                 font-size: 0.8rem;
             }
+        }
+        .delete {
+            display: block;
+            background-color: #ccc;
+            font-size: 1.2rem;
+            padding: 0.8rem;
+            border: 1px solid #444;
+            border-radius: 5px;
+            margin: 1rem auto 0;
         }
     }
     

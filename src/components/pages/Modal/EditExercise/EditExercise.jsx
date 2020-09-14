@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { AuthContext } from "../../Layout"
-import firebase from "../../../firebase"
+import { AuthContext } from "../../../Layout"
+import firebase from "../../../../firebase"
+import StyledComponent from "./EditExercise.styled"
 
 
 function EditExercise(props) {
@@ -78,19 +79,21 @@ function EditExercise(props) {
 
   console.log(myExercise)
   return (
-    <div style={{ width: '100%', height: '100vh', backgroundColor: "#eee", position: "fixed", zIndex: 10 }}>
-      <button onClick={() => { props.closed(false) }}>×</button>
-      <h1>my exercise</h1>
-      <div>
-        <ul>
-          {myExercise.map((menu, index) =>
-            <li key={index}>{menu}<button onClick={() => exerciseDelete(index)}>×</button></li>
-          )}
-        </ul>
-        <input type="text" value={newMenu} onChange={(e) => setNewMenu(e.target.value)} />
-        <button onClick={exerciseAdd}> 追加</button>
+    <StyledComponent>
+      <div className="modal_box">
+        <button className="close-button" onClick={() => { props.closed(false) }}>×</button>
+        <h2>My exercise edit</h2>
+        <div className="exercises">
+          <ul>
+            {myExercise.map((menu, index) =>
+              <li key={index}>{menu}<button onClick={() => exerciseDelete(index)}>×</button></li>
+            )}
+          </ul>
+          <input type="text" value={newMenu} onChange={(e) => setNewMenu(e.target.value)} />
+          <button className="add-button" onClick={exerciseAdd}> 追加</button>
+        </div>
       </div>
-    </div>
+    </StyledComponent>
   );
 }
 

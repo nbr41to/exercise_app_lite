@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { AuthContext } from "../../Layout"
-import firebase from "../../../firebase"
+import { AuthContext } from "../../../Layout"
+import firebase from "../../../../firebase"
+import StyledComponent from "./NewPost.styled"
 
 function NewPost(props) {
   const [user, setUser] = useContext(AuthContext);
@@ -76,24 +77,29 @@ function NewPost(props) {
   }
 
   return (
-    <div style={{ width: '100%', height: '100vh', backgroundColor: "#eee", position: "fixed", zIndex: 10 }}>
-      <button onClick={() => { props.closed(false) }}>×</button>
-      <h1>new post</h1>
-      <p>下から投稿するエクササイズを追加してください！</p>
-      <ul>
-        {postExercises.map((menu, index) => <li key={index}>{menu}</li>)}
-      </ul>
-      <p>達成感や感想など！</p>
-      <input type="text" placeholder="real ecstacy" onChange={(e) => setComment(e.target.value)} />
-      <button onClick={onSubmit}>投稿</button >
-      <hr />
-      <h2>my exercise</h2>
-      <ul>
-        {myExercise.map((menu, index) =>
-          <li key={index}>{menu}<button onClick={() => { exerciseSelect(index) }}>＋</button></li>
-        )}
-      </ul>
-    </div >
+    <StyledComponent>
+      <div className="modal_box">
+        <button className="close-button" onClick={() => { props.closed(false) }}>×</button>
+        <div className="exercises">
+          <h2>My exercise</h2>
+          <p>下から投稿するエクササイズを追加</p>
+          <ul>
+            {myExercise.map((menu, index) =>
+              <li key={index}>{menu}<button onClick={() => { exerciseSelect(index) }}>＋</button></li>
+            )}
+          </ul>
+        </div>
+        <div className="new-post">
+          <h2>New post</h2>
+          <ul>
+            <h2> - MENU - </h2>
+            {postExercises.map((menu, index) => <li key={index}>{menu}</li>)}
+          </ul>
+          <input type="text" placeholder="達成感や感想など" onChange={(e) => setComment(e.target.value)} />
+          <button className="post-button" onClick={onSubmit}>投稿</button >
+        </div>
+      </div>
+    </StyledComponent >
   );
 }
 

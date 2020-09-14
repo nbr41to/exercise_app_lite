@@ -42,9 +42,8 @@ export default function Post({ users, post, index }) {
     return (
         <StyledComponent key={index} >
             <div className="user-info">
-                <img src={thisUser.photo_url} style={{ width: "100px", height: "100px", borderRadius: "100%" }} />
+                <img src={thisUser.photo_url} />
                 <p>{thisUser.name}</p>
-                {(post.user_id === user.id) && <button className="delete" onClick={() => postDelete(post.post_id)}>投稿削除</button>}
             </div>
             <div className="post-info">
                 <ul>
@@ -62,6 +61,7 @@ export default function Post({ users, post, index }) {
                     >👍 {post.nice.length}</button>
                     <p className="time">{post.time}</p>
                 </div>
+                {(post.user_id === user.id) && <button className="delete" onClick={() => postDelete(post.post_id)}>投稿削除</button>}
             </div>
         </StyledComponent>
     )

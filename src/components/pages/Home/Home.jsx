@@ -4,7 +4,6 @@ import StyledComponent from "./Home.styled"
 import NewPost from "../Modal/NewPost"
 import EditExercise from "../Modal/EditExercise"
 import EditProfile from "../Modal/EditProfile"
-import Post from "../../Post"
 import PostView from "../../orgnisms/PostView"
 import { AuthContext } from "../../Layout"
 
@@ -39,8 +38,8 @@ function Home() {
       {openNew && <NewPost closed={setOpenNew} />}
       {openExercise && <EditExercise closed={setOpenExercise} />}
       {openProfile && <EditProfile closed={setOpenProfile} />}
-      <h1>今日も楽しい選択をしよう！</h1>
-      <p>{user.name}でログイン中...</p>
+      <h1 className="top-msg">今日も楽しい選択をしよう！</h1>
+      <p className="user-info">{user.name}でログイン中...</p>
       {/* <p>投稿数：</p>
       <p>NICE：</p> */}
       <div className="user-menu">
@@ -54,8 +53,7 @@ function Home() {
           <PersonIcon />
         </button >
       </div>
-      <h2>Today's post</h2>
-      {/* <Post /> */}
+      <h2 className="posts-ttl">Today's posts</h2>
       <PostView />
     </StyledComponent >
   );
